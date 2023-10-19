@@ -54,9 +54,6 @@ export function useStore<TState, StateSlice>(
     equalityFn &&
     !didWarnAboutEqualityFn
   ) {
-    console.warn(
-      "[DEPRECATED] Use `createWithEqualityFn` instead of `create` or use `useStoreWithEqualityFn` instead of `useStore`. They can be imported from 'zustand/traditional'. https://github.com/pmndrs/zustand/discussions/1937"
-    )
     didWarnAboutEqualityFn = true
   }
   const slice = useSyncExternalStoreWithSelector(
@@ -100,9 +97,6 @@ const createImpl = <T>(createState: StateCreator<T, [], []>) => {
     import.meta.env?.MODE !== 'production' &&
     typeof createState !== 'function'
   ) {
-    console.warn(
-      "[DEPRECATED] Passing a vanilla store will be unsupported in a future version. Instead use `import { useStore } from 'zustand'`."
-    )
   }
   const api =
     typeof createState === 'function' ? createStore(createState) : createState
@@ -122,10 +116,5 @@ export const create = (<T>(createState: StateCreator<T, [], []> | undefined) =>
  * @deprecated Use `import { create } from 'zustand'`
  */
 export default ((createState: any) => {
-  if (import.meta.env?.MODE !== 'production') {
-    console.warn(
-      "[DEPRECATED] Default export is deprecated. Instead use `import { create } from 'zustand'`."
-    )
-  }
   return create(createState)
 }) as Create

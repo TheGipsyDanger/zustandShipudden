@@ -544,11 +544,6 @@ const persistImpl: PersistImpl = (config, baseOptions) => {
     'serialize' in baseOptions ||
     'deserialize' in baseOptions
   ) {
-    if (import.meta.env?.MODE !== 'production') {
-      console.warn(
-        '[DEPRECATED] `getStorage`, `serialize` and `deserialize` options are deprecated. Use `storage` option instead.'
-      )
-    }
     return oldImpl(config, baseOptions)
   }
   return newImpl(config, baseOptions)
